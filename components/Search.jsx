@@ -1,15 +1,30 @@
-import React from 'react'
-import {FcSearch} from 'react-icons/fc'
+import React, {useState, useContext } from "react";
+import SearchContext from "../context/SearchContext";
+import { FcSearch } from "react-icons/fc";
 
 const Search = () => {
-  return (
-    <div className='w-full mt-20'>
-        <div className='max-w-[1240px] w-[100%] m-auto flex justify-center items-center p-10'>
-            <input className='border rounded p-1' type="text" placeholder='Search' />
-            <FcSearch className='ml-1 cursor-pointer' size={20}/>
-        </div>      
-    </div>
-  )
-}
+  const context = useContext(SearchContext);
+  const [userInput, setUserInput] = useState("");
 
-export default Search
+  const handleOnCLick = () => {
+      context.setUserSearch(userInput);
+  }
+
+  return (
+    <div className="w-full mt-20">
+      <div className="max-w-[1240px] w-[100%] m-auto flex justify-center items-center p-10">
+        <input
+          className="border rounded p-1"
+          type="text"
+          placeholder="Search"
+          onChange={(e) => {
+            setUserInput(e.target.value);
+          }}
+        />
+        <FcSearch className="ml-1 cursor-pointer" size={20} onClick={handleOnCLick} />
+      </div>
+    </div>
+  );
+};
+
+export default Search;

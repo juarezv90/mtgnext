@@ -1,21 +1,26 @@
 import axios from "axios";
-import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import SearchContext from "../context/SearchContext";
 
 const SearchResults = () => {
   const [searchedCards, setSearchedCards] = useState(null);
+  const context = useContext(SearchContext);
 
-//   const apiURL = "https://api.scryfall.com/cards/";
+  const apiURL = "https://api.scryfall.com/cards/";
 
-//   useEffect(() => {
-//     const loadData = async () => {
-//       const load = await axios.get(`${apiURL}search?q=nissa`);
-//       const loaded = await load?.data;
-//       setSearchedCards(() => loaded?.data);
-//     };
+  useEffect(() => {
+    setSearchedCards(null);
+    
+    const loadData = async () => {
+      const load = await axios.get(`${apiURL}search?q=${context.userSearch}`);
+      const loaded = await load?.data;
+      setSearchedCards(() => loaded?.data);
+    };
 
-//     loadData();
-//   }, []);
+    if(context.userSearch.length > 0) {
+      loadData();
+    }
+  }, [context.userSearch]);
 
 //   console.log(searchedCards);
   return (
