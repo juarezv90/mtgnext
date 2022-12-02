@@ -1,10 +1,28 @@
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 const Navbar = () => {
+  const [navBG, setNavBG] = useState("white")
+  const [textColor, setTextColor] = useState("black");
+
+  const router = useRouter();
+
+  useEffect(() => {
+    if(router.asPath === '/DeckCheck'){
+      setNavBG("rgba(0 0 0 / .8)")
+      setTextColor("white")
+    } else {
+      setNavBG("white")
+      setTextColor("black")
+    }
+
+  }, [router])
+
+
   return (
-    <div className="w-full fixed top-0 left-0 shadow-xl z-[100] bg-white">
-      <div className="max-w-[1240px] h-20 m-auto flex justify-center items-center">
+    <div style={{backgroundColor: `${navBG}`, color: `${textColor}`}} className="w-full fixed top-0 left-0 z-[100] shadow-xl">
+      <div className="max-w-[1240px] h-20 m-auto flex justify-center items-center px-3">
         <div className="mr-auto">
           <h1 className="text-xl md:text-3xl">The Crammed Mox</h1>
         </div>

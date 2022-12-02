@@ -1,5 +1,4 @@
-import { useState, createContext } from "react";
-import Head from "next/head";
+import { useState } from "react";
 import Search from "../components/Search";
 import SearchResults from "../components/SearchResults";
 import SearchContext from "../context/SearchContext";

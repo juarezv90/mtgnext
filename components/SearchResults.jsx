@@ -1,6 +1,5 @@
 import axios from "axios";
-import Image from "next/image";
-import React, { useEffect, useState, useContext, use } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import SearchContext from "../context/SearchContext";
 import Cards from "./Cards";
 
@@ -32,7 +31,6 @@ const SearchResults = () => {
   };
 
   const backface = () => {
-    console.log(searchedCards[selectedCard]?.card_faces);
     return (
       <img
         className="m-auto row-start-2"
@@ -103,7 +101,7 @@ const SearchResults = () => {
     <div className="w-full">
       <div
         id="contentBox"
-        className="max-w-[1240px] m-auto w-[100%] grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8"
+        className="max-w-[1240px] m-auto w-[100%] grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 p-4"
       >
         {searchedCards?.map((card, index) => {
           return (
