@@ -3,11 +3,13 @@ import React, { useEffect, useState } from "react";
 import { cardCounter } from "../components/functions/apiCalls";
 import { reform } from "../components/functions/deckFunctions";
 import PowerLevel from "../components/PowerLevel";
+import Cards from"../components/Cards"
 
 const DeckCheck = () => {
   const [cardList, setCardList] = useState("");
   const [deck, setDeck] = useState(null);
   const [cardsFound, setCardsFound] = useState(null);
+  const [card, setCard] = useState({});
 
   const [mobileCardDisplay, setMobileCardDisplay] = useState(false);
 
@@ -35,15 +37,6 @@ const DeckCheck = () => {
     document.getElementById("image").src ="";
   };
 
-  const handleMouseOver = (e) => {
-    document.getElementById("image").src = e.image_uris.normal;
-  };
-
-  const handleCardClick = (e) => {
-    document.getElementById('mobileCard').src = e.image_uris.png;
-    setMobileCardDisplay(true)
-  }
-
   return (
     <div className="w-full">
       <div className="w-screen h-[30vh] lg:h-[40vh] mx-auto relative">
@@ -58,8 +51,9 @@ const DeckCheck = () => {
       <div className="max-w-[1240px] mx-auto p-2 grid md:grid-cols-3 gap-8 pt-8">
         {/* start of card list enter */}
         <div className="flex flex-col mx-auto md:col-span-1 justify-start items-center">
-          <div className="hidden max-h-[40vh] md:inline mb-5 w-[80%] h-[40vh] border">
-            <img className="hidden md:inline md:w-full md:h-full" id="image" src="" alt="" />
+          {/* card displayed on mouseover, disable on mobile and sm screen */}
+          <div className="hidden w-[70%] max-h-[40vh] md:inline mb-5 h-[40vh]">
+           <Cards item={card} />
           </div>
           <PowerLevel cardCount={cardsFound} />
           <textarea
@@ -86,15 +80,18 @@ const DeckCheck = () => {
             Reset
           </button>
         </div>
-        {/* Start of card display */}
+        {/* Start of card pop up display used for both mobile and screen */}
         <div className="md:col-span-2 columns-2 md:columns-4 p-2">
           {cardsFound?.map((e) => (
             <p
               className="p-1 cursor-pointer"
               onMouseOver={() => {
-                handleMouseOver(e);
+                setCard(e);
               }}
-              onClick={() => {handleCardClick(e)}}
+              onClick={() => {
+                setCard(e)
+                setMobileCardDisplay(true)
+              }}
             >
               {e.name}
             </p>
@@ -103,7 +100,7 @@ const DeckCheck = () => {
       </div>
       <div className={mobileCardDisplay ? "fixed top-0 left-0 bg-black/80 w-screen h-screen z-[100] p-10" : "hidden"} onClick={()=> setMobileCardDisplay(false)}>
         <div className="max-w-[1240px] mx-auto text-white grid">
-          <img id="mobileCard" className="mx-auto w-[80%] md:w-[400px] rounded" src="" alt="" />
+          <Cards item={card} />
         </div>
       </div>
     </div>

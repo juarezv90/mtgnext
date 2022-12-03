@@ -25,11 +25,9 @@ const Cards = ({ item }) => {
   return (
     <div>
       <img
-        className="m-auto"
+        className="m-auto object-contain"
         src={src}
         alt={card?.name}
-        width={300}
-        height={300}
         onMouseOver={(e) => { e.target.src = handleSrc()}}
         onMouseOut={(e) => { e.target.src = handleMouseOut()}}
       />

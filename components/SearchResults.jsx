@@ -33,11 +33,9 @@ const SearchResults = () => {
   const backface = () => {
     return (
       <img
-        className="m-auto row-start-2"
+        className="w-[100%] object-contain max-h-[100%]"
         src={searchedCards[selectedCard]?.card_faces[1]?.image_uris?.png}
         alt={"/"}
-        width={300}
-        height={300}
       />
     );
   };
@@ -66,34 +64,34 @@ const SearchResults = () => {
 
   const twoFaceData = () => {
     return (
-      <div className="text-white md:text-xl row-start-1 row-end-2">
-
-
-        <h1 className="text-lg font-bold md:text-4xl pb-2">
-          {searchedCards[selectedCard]?.card_faces[0]?.name}
-        </h1>
-        <p className="pb-2">
-          {searchedCards[selectedCard]?.card_faces[0]?.type_line}
-        </p>
-        {searchedCards[selectedCard]?.card_faces[0]?.oracle_text
-          ?.split("\n")
-          .map((string) => {
-            return <p className="pb-2">{string}</p>;
-          })}
-
-
-        <h1 className="text-lg font-bold md:text-4xl pb-2">
-          {searchedCards[selectedCard]?.card_faces[1]?.name}
-        </h1>
-        <p className="pb-2">
-          {searchedCards[selectedCard]?.card_faces[1]?.type_line}
-        </p>
-        {searchedCards[selectedCard]?.card_faces[1]?.oracle_text
-          ?.split("\n")
-          .map((string) => {
-            return <p className="pb-2">{string}</p>;
-          })}
-      </div>
+      <>
+        <div className="row-start-2 md:col-start-2 md:row-start-1 text-white">
+          <h1 className="text-lg font-bold md:text-5xl mb-2">
+            {searchedCards[selectedCard]?.card_faces[0]?.name}
+          </h1>
+          <p className="mb-2 md:text-lg">
+            {searchedCards[selectedCard]?.card_faces[0]?.type_line}
+          </p>
+          {searchedCards[selectedCard]?.card_faces[0]?.oracle_text
+            ?.split("\n")
+            .map((string) => {
+              return <p className="mb-2 md:text-lg">{string}</p>;
+            })}
+        </div>
+        <div className="md:col-start-2 md:row-start-2 text-white">
+          <h1 className="text-lg font-bold md:text-5xl mb-2">
+            {searchedCards[selectedCard]?.card_faces[1]?.name}
+          </h1>
+          <p className="mb-2 md:text-lg">
+            {searchedCards[selectedCard]?.card_faces[1]?.type_line}
+          </p>
+          {searchedCards[selectedCard]?.card_faces[1]?.oracle_text
+            ?.split("\n")
+            .map((string) => {
+              return <p className="mb-2 md:text-lg">{string}</p>;
+            })}
+        </div>
+      </>
     );
   };
 
@@ -101,7 +99,7 @@ const SearchResults = () => {
     <div className="w-full">
       <div
         id="contentBox"
-        className="max-w-[1240px] m-auto w-[100%] grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 p-4"
+        className="max-w-[1240px] m-auto w-[100%] grid md:grid-cols-3 lg:grid-cols-4 gap-8 sm:grid-rows-2 p-4"
       >
         {searchedCards?.map((card, index) => {
           return (
@@ -132,9 +130,9 @@ const SearchResults = () => {
           >
             X
           </span>
-          <div className="max-w-[1240px] h-[100%] m-auto grid md:grid-cols-2 md:grid-rows-2 p-10 relative gap-20 overflow-y-scroll sm:overflow-auto md:p-20">
+          <div className="max-w-[1240px] h-[100%] m-auto grid md:grid-cols-2 md:grid-rows-2 relative gap-20 overflow-y-scroll">
             <img
-              className="m-auto md:row-start-1 md:col-start-1"
+              className="w-[100%] object-contain max-h-[100%] md:col-start-1 md:row-start-1"
               src={
                 searchedCards != null
                   ? searchedCards[selectedCard]?.card_faces?.length > 0
@@ -144,8 +142,6 @@ const SearchResults = () => {
                   : null
               }
               alt={"/"}
-              width={300}
-              height={300}
             />
             {searchedCards != null
               ? searchedCards[selectedCard]?.card_faces?.length > 0
