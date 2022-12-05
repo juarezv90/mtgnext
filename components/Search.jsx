@@ -9,7 +9,6 @@ const Search = () => {
   const handleOnCLick = () => {
       context.setUserSearch(userInput);
   }
-
   return (
     <div className="w-full mt-20">
       <div className="max-w-[1240px] w-[100%] m-auto flex justify-center items-center p-10">
@@ -21,7 +20,11 @@ const Search = () => {
             setUserInput(e.target.value);
           }}
         />
-        <FcSearch className="ml-1 cursor-pointer" size={20} onClick={handleOnCLick} />
+        
+        <button style={{backgroundColor: "transparent", border: "none"}} onClick={handleOnCLick}>
+          <FcSearch className="ml-1 cursor-pointer" size={20}  />
+        </button>
+        
       </div>
     </div>
   );
