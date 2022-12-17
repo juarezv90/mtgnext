@@ -11,15 +11,23 @@ const SearchResults = () => {
 
   const apiURL = "https://api.scryfall.com/cards/";
 
+  const loadData = async () => {
+    const load = await axios.get(`${apiURL}search?q=${context.userSearch}`);
+    const loaded = await load?.data;
+    setSearchedCards(() => loaded?.data);
+    if (loaded?.has_more) {
+      loadMoreCards(loaded?.next_page);
+    }
+  };
+
+  const loadMoreCards = async (nextPage) => {
+    const load = await axios.get(`${nextPage}`);
+    const loaded = await load?.data;
+    setSearchedCards((prev) => [...prev, ...loaded?.data])
+  }
+
   useEffect(() => {
     setSearchedCards(null);
-
-    const loadData = async () => {
-      const load = await axios.get(`${apiURL}search?q=${context.userSearch}`);
-      const loaded = await load?.data;
-      setSearchedCards(() => loaded?.data);
-    };
-
     if (context.userSearch.length > 0) {
       loadData();
     }
@@ -112,6 +120,8 @@ const SearchResults = () => {
             </div>
           );
         })}
+
+        {console.log(searchedCards)}
 
         {/* Is the data display for cards */}
         <div
