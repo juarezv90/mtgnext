@@ -24,6 +24,9 @@ const SearchResults = () => {
     const load = await axios.get(`${nextPage}`);
     const loaded = await load?.data;
     setSearchedCards((prev) => [...prev, ...loaded?.data]);
+    if (loaded?.has_more) {
+      loadMoreCards(loaded?.next_page);
+    }
   };
 
   useEffect(() => {
