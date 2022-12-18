@@ -23,8 +23,8 @@ const SearchResults = () => {
   const loadMoreCards = async (nextPage) => {
     const load = await axios.get(`${nextPage}`);
     const loaded = await load?.data;
-    setSearchedCards((prev) => [...prev, ...loaded?.data])
-  }
+    setSearchedCards((prev) => [...prev, ...loaded?.data]);
+  };
 
   useEffect(() => {
     setSearchedCards(null);
@@ -36,16 +36,6 @@ const SearchResults = () => {
   const handleDisplayClick = (number) => {
     setDisplayData(true);
     setSelectedCard(number);
-  };
-
-  const backface = () => {
-    return (
-      <img
-        className="w-[100%] object-contain max-h-[100%]"
-        src={searchedCards[selectedCard]?.card_faces[1]?.image_uris?.png}
-        alt={"/"}
-      />
-    );
   };
 
   const singleSide = () => {
@@ -103,6 +93,38 @@ const SearchResults = () => {
     );
   };
 
+  function displayCardData() {
+    if (searchedCards && searchedCards[selectedCard]?.card_faces?.length > 0) {
+      return twoFaceData();
+    } else if (searchedCards) {
+      return singleSide();
+    }
+    return null;
+  }
+
+  function cardToShow(selectedCard) {
+    if (searchedCards && searchedCards[selectedCard]?.card_faces?.length > 0) {
+      return searchedCards[selectedCard]?.card_faces[0]?.image_uris?.png;
+    } else if (searchedCards) {
+      return searchedCards[selectedCard]?.image_uris?.png;
+    }
+
+    return null;
+  }
+
+  function displaySideTwo(selectedCard) {
+    if (searchedCards && searchedCards[selectedCard]?.card_faces?.length > 0) {
+      return (
+        <img
+          className="w-[100%] object-contain max-h-[100%]"
+          src={searchedCards[selectedCard]?.card_faces[1]?.image_uris?.png}
+          alt={"/"}
+        />
+      );
+    }
+    return null;
+  }
+
   return (
     <div className="w-full">
       <div
@@ -143,26 +165,11 @@ const SearchResults = () => {
           <div className="max-w-[1240px] h-[100%] m-auto grid md:grid-cols-2 md:grid-rows-2 relative gap-20 overflow-y-scroll">
             <img
               className="w-[100%] object-contain max-h-[100%] md:col-start-1 md:row-start-1"
-              src={
-                searchedCards != null
-                  ? searchedCards[selectedCard]?.card_faces?.length > 0
-                    ? searchedCards[selectedCard]?.card_faces[0]?.image_uris
-                        ?.png
-                    : searchedCards[selectedCard]?.image_uris?.png
-                  : null
-              }
+              src={cardToShow(selectedCard)}
               alt={"/"}
             />
-            {searchedCards != null
-              ? searchedCards[selectedCard]?.card_faces?.length > 0
-                ? backface()
-                : null
-              : null}
-            {searchedCards != null
-              ? searchedCards[selectedCard]?.card_faces?.length > 0
-                ? twoFaceData()
-                : singleSide()
-              : null}
+            {displaySideTwo(selectedCard)}
+            {displayCardData()}
           </div>
         </div>
       </div>
