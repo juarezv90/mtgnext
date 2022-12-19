@@ -10,7 +10,7 @@ const Search = () => {
       context.setUserSearch(userInput);
   }
   return (
-    <div className="w-full mt-20">
+    <div className="w-full mt-20" id="search">
       <div className="max-w-[1240px] w-[100%] m-auto flex justify-center items-center p-10">
         <input
           className="border rounded p-1"

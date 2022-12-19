@@ -163,6 +163,7 @@ const SearchResults = () => {
         totalCards={totalCards}
         cardsPerPage={cardsPerPage}
         setCurrentPage={setCurrentPage}
+        currentPage={currentPage}
       />
 
       {/* Is the data display for cards */}
