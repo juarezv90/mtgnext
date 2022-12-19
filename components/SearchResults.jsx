@@ -2,12 +2,25 @@ import axios from "axios";
 import React, { useEffect, useState, useContext } from "react";
 import SearchContext from "../context/SearchContext";
 import Cards from "./Cards";
+import Pagination from "./Pagination";
 
 const SearchResults = () => {
   const [searchedCards, setSearchedCards] = useState(null);
   const [displayData, setDisplayData] = useState(false);
   const [selectedCard, setSelectedCard] = useState(0);
+  const [totalCards, setTotalCards] = useState(0);
   const context = useContext(SearchContext);
+
+  if (searchedCards?.length && searchedCards?.length > totalCards) {
+    setTotalCards(searchedCards?.length);
+  }
+
+  const [cardsPerPage, setCardsPerPage] = useState(20);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const lastCardIndex = currentPage * cardsPerPage;
+  const firstCardIndex = lastCardIndex - cardsPerPage;
+  const currentCards = searchedCards?.slice(firstCardIndex, lastCardIndex);
 
   const apiURL = "https://api.scryfall.com/cards/";
 
@@ -134,7 +147,7 @@ const SearchResults = () => {
         id="contentBox"
         className="max-w-[1240px] m-auto w-[100%] grid md:grid-cols-3 lg:grid-cols-4 gap-8 sm:grid-rows-2 p-4"
       >
-        {searchedCards?.map((card, index) => {
+        {currentCards?.map((card, index) => {
           return (
             <div
               key={index}
@@ -145,35 +158,38 @@ const SearchResults = () => {
             </div>
           );
         })}
+      </div>
+      <Pagination
+        totalCards={totalCards}
+        cardsPerPage={cardsPerPage}
+        setCurrentPage={setCurrentPage}
+      />
 
-        {console.log(searchedCards)}
-
-        {/* Is the data display for cards */}
-        <div
-          onClick={() => {
-            setDisplayData(false);
-          }}
-          className={
-            displayData
-              ? "w-full pt-20 bg-black/80 h-[100%] z-[100] fixed top-0 left-0"
-              : "hidden"
-          }
+      {/* Is the data display for cards */}
+      <div
+        onClick={() => {
+          setDisplayData(false);
+        }}
+        className={
+          displayData
+            ? "w-full pt-20 bg-black/80 h-[100%] z-[100] fixed top-0 left-0"
+            : "hidden"
+        }
+      >
+        <span
+          onClick={() => setDisplayData(false)}
+          className="absolute z-[1000]  cursor-pointer font-bold text-red-600 text-2xl right-2 top-0 rounded-full p-2 md:text-4xl"
         >
-          <span
-            onClick={() => setDisplayData(false)}
-            className="absolute z-[1000]  cursor-pointer font-bold text-red-600 text-2xl right-2 top-0 rounded-full p-2 md:text-4xl"
-          >
-            X
-          </span>
-          <div className="max-w-[1240px] h-[100%] m-auto grid md:grid-cols-2 md:grid-rows-2 relative gap-20 overflow-y-scroll">
-            <img
-              className="w-[100%] object-contain max-h-[100%] md:col-start-1 md:row-start-1"
-              src={cardToShow(selectedCard)}
-              alt={"/"}
-            />
-            {displaySideTwo(selectedCard)}
-            {displayCardData()}
-          </div>
+          X
+        </span>
+        <div className="max-w-[1240px] h-[100%] m-auto grid md:grid-cols-2 md:grid-rows-2 relative gap-20 overflow-y-scroll">
+          <img
+            className="w-[100%] object-contain max-h-[100%] md:col-start-1 md:row-start-1"
+            src={cardToShow(selectedCard)}
+            alt={"/"}
+          />
+          {displaySideTwo(selectedCard)}
+          {displayCardData()}
         </div>
       </div>
     </div>
