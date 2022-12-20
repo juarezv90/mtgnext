@@ -58,15 +58,15 @@ const SearchResults = () => {
     return (
       <div className="text-white md:text-xl">
         <h1 className="text-lg font-bold md:text-4xl pb-2">
-          {searchedCards != null ? searchedCards[selectedCard]?.name : null}
+          {currentCards != null ? currentCards[selectedCard]?.name : null}
         </h1>
         <p className="pb-2">
-          {searchedCards != null
-            ? searchedCards[selectedCard]?.type_line
+          {currentCards != null
+            ? currentCards[selectedCard]?.type_line
             : null}
         </p>
-        {searchedCards != null
-          ? searchedCards[selectedCard]?.oracle_text
+        {currentCards != null
+          ? currentCards[selectedCard]?.oracle_text
               ?.split("\n")
               .map((string) => {
                 return <p>{string}</p>;
@@ -81,12 +81,12 @@ const SearchResults = () => {
       <>
         <div className="row-start-2 md:col-start-2 md:row-start-1 text-white">
           <h1 className="text-lg font-bold md:text-5xl mb-2">
-            {searchedCards[selectedCard]?.card_faces[0]?.name}
+            {currentCards[selectedCard]?.card_faces[0]?.name}
           </h1>
           <p className="mb-2 md:text-lg">
-            {searchedCards[selectedCard]?.card_faces[0]?.type_line}
+            {currentCards[selectedCard]?.card_faces[0]?.type_line}
           </p>
-          {searchedCards[selectedCard]?.card_faces[0]?.oracle_text
+          {currentCards[selectedCard]?.card_faces[0]?.oracle_text
             ?.split("\n")
             .map((string) => {
               return <p className="mb-2 md:text-lg">{string}</p>;
@@ -94,12 +94,12 @@ const SearchResults = () => {
         </div>
         <div className="md:col-start-2 md:row-start-2 text-white">
           <h1 className="text-lg font-bold md:text-5xl mb-2">
-            {searchedCards[selectedCard]?.card_faces[1]?.name}
+            {currentCards[selectedCard]?.card_faces[1]?.name}
           </h1>
           <p className="mb-2 md:text-lg">
-            {searchedCards[selectedCard]?.card_faces[1]?.type_line}
+            {currentCards[selectedCard]?.card_faces[1]?.type_line}
           </p>
-          {searchedCards[selectedCard]?.card_faces[1]?.oracle_text
+          {currentCards[selectedCard]?.card_faces[1]?.oracle_text
             ?.split("\n")
             .map((string) => {
               return <p className="mb-2 md:text-lg">{string}</p>;
@@ -110,30 +110,30 @@ const SearchResults = () => {
   };
 
   function displayCardData() {
-    if (searchedCards && searchedCards[selectedCard]?.card_faces?.length > 0) {
+    if (currentCards && currentCards[selectedCard]?.card_faces?.length > 0) {
       return twoFaceData();
-    } else if (searchedCards) {
+    } else if (currentCards) {
       return singleSide();
     }
     return null;
   }
 
   function cardToShow(selectedCard) {
-    if (searchedCards && searchedCards[selectedCard]?.card_faces?.length > 0) {
-      return searchedCards[selectedCard]?.card_faces[0]?.image_uris?.png;
-    } else if (searchedCards) {
-      return searchedCards[selectedCard]?.image_uris?.png;
+    if (currentCards && currentCards[selectedCard]?.card_faces?.length > 0) {
+      return currentCards[selectedCard]?.card_faces[0]?.image_uris?.png;
+    } else if (currentCards) {
+      return currentCards[selectedCard]?.image_uris?.png;
     }
 
     return null;
   }
 
   function displaySideTwo(selectedCard) {
-    if (searchedCards && searchedCards[selectedCard]?.card_faces?.length > 0) {
+    if (currentCards && currentCards[selectedCard]?.card_faces?.length > 0) {
       return (
         <img
           className="w-[100%] object-contain max-h-[100%]"
-          src={searchedCards[selectedCard]?.card_faces[1]?.image_uris?.png}
+          src={currentCards[selectedCard]?.card_faces[1]?.image_uris?.png}
           alt={"/"}
         />
       );
