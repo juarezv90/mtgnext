@@ -23,7 +23,7 @@ const Cards = ({ item }) => {
   }
 
   return (
-    <div className="w-[75%] sm:w-[100%] h-[100%] max-h-[80vh] mx-auto">
+    <div className="w-[75%] sm:w-[100%] h-[100%] max-h-[80vh] mx-auto relative">
       <img
         className="m-auto w-[100%] h-[100%] object-contain"
         src={src}
