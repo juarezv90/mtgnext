@@ -11,11 +11,14 @@ const SearchResults = () => {
   const [totalCards, setTotalCards] = useState(0);
   const context = useContext(SearchContext);
 
-  if (searchedCards?.length && searchedCards?.length > totalCards) {
-    setTotalCards(searchedCards?.length);
-  }
+  useEffect(() => {
+    if (searchedCards?.length && searchedCards?.length > totalCards) {
+      const total = searchedCards?.length;
+      setTotalCards(total);
+    }
+  }, [searchedCards]);
 
-  const [cardsPerPage, setCardsPerPage] = useState(20);
+  const cardsPerPage = 20;
   const [currentPage, setCurrentPage] = useState(1);
 
   const lastCardIndex = currentPage * cardsPerPage;
@@ -61,9 +64,7 @@ const SearchResults = () => {
           {currentCards != null ? currentCards[selectedCard]?.name : null}
         </h1>
         <p className="pb-2">
-          {currentCards != null
-            ? currentCards[selectedCard]?.type_line
-            : null}
+          {currentCards != null ? currentCards[selectedCard]?.type_line : null}
         </p>
         {currentCards != null
           ? currentCards[selectedCard]?.oracle_text
