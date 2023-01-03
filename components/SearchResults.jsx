@@ -70,7 +70,7 @@ const SearchResults = () => {
           ? currentCards[selectedCard]?.oracle_text
               ?.split("\n")
               .map((string) => {
-                return <p>{string}</p>;
+                return <p key={string}>{string}</p>;
               })
           : null}
       </div>
@@ -90,7 +90,7 @@ const SearchResults = () => {
           {currentCards[selectedCard]?.card_faces[0]?.oracle_text
             ?.split("\n")
             .map((string) => {
-              return <p className="mb-2 md:text-lg">{string}</p>;
+              return <p key={string} className="mb-2 md:text-lg">{string}</p>;
             })}
         </div>
         <div className="md:col-start-2 md:row-start-2 text-white">
@@ -103,7 +103,7 @@ const SearchResults = () => {
           {currentCards[selectedCard]?.card_faces[1]?.oracle_text
             ?.split("\n")
             .map((string) => {
-              return <p className="mb-2 md:text-lg">{string}</p>;
+              return <p key={string} className="mb-2 md:text-lg">{string}</p>;
             })}
         </div>
       </>
@@ -148,14 +148,14 @@ const SearchResults = () => {
         id="contentBox"
         className="max-w-[1240px] m-auto w-[100%] grid md:grid-cols-3 lg:grid-cols-4 gap-8 sm:grid-rows-2 p-4"
       >
-        {currentCards?.map((card, index) => {
+        {currentCards?.map((card) => {
           return (
             <div
-              key={index}
+              key={card}
               onClick={() => handleDisplayClick(index)}
               className="relative col-span-1 cursor-pointer"
             >
-              <Cards key={index} item={card} />
+              <Cards key={card} item={card} />
             </div>
           );
         })}
