@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
 const Navbar = () => {
-  const [navBG, setNavBG] = useState("white")
+  const [navBG, setNavBG] = useState("rgba(10 100 40 / .5)")
   const [textColor, setTextColor] = useState("black");
 
   const router = useRouter();
@@ -13,7 +13,7 @@ const Navbar = () => {
       setNavBG("rgba(0 0 0 / .8)")
       setTextColor("white")
     } else {
-      setNavBG("white")
+      setNavBG("rgba(10 100 40 / .5)")
       setTextColor("black")
     }
 
