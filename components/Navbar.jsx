@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
 const Navbar = () => {
-  const [navBG, setNavBG] = useState("rgba(10 100 40 / .5)")
+  const [navBG, setNavBG] = useState("white")
   const [textColor, setTextColor] = useState("black");
 
   const router = useRouter();
@@ -13,7 +13,7 @@ const Navbar = () => {
       setNavBG("rgba(0 0 0 / .8)")
       setTextColor("white")
     } else {
-      setNavBG("rgba(10 100 40 / .5)")
+      setNavBG("white")
       setTextColor("black")
     }
 
@@ -33,6 +33,7 @@ const Navbar = () => {
           <Link href="/DeckCheck">
             <p className="cursor-pointer p-2">Deck Check</p>
           </Link>
+          <Link href="/Blotter"><p className="cursor-pointer p-2">Blotter</p></Link>
         </div>
       </div>
     </div>
