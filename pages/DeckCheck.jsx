@@ -43,8 +43,8 @@ const DeckCheck = () => {
       <div className="w-screen h-[25vh] mx-auto relative">
         <div className="absolute top-0 left-0 w-full h-[25vh] bg-black/40 z-10" />
         <Image
-          layout="fill"
-          objectFit="cover"
+          fill
+          cover
           src="/assets/mtgcards.jpg"
           alt="header"
         />
@@ -93,7 +93,7 @@ const DeckCheck = () => {
               display ? "hidden" : "hidden w-[70%] max-h-[35vh] md:inline mb-5"
             }
           >
-           {card ? <Cards item={card} /> : ""} 
+            {card ? <Cards item={card} /> : ""}
           </div>
           <PowerLevel cardCount={cardsFound} />
         </div>
@@ -102,7 +102,12 @@ const DeckCheck = () => {
           <h1 className="text-xl font-bold shadow-md border-[1px] px-2 mb-1">
             Planeswalkers
           </h1>
-          {cardFilterer(cardsFound, "Planeswalker", setCard, setMobileCardDisplay)}
+          {cardFilterer(
+            cardsFound,
+            "Planeswalker",
+            setCard,
+            setMobileCardDisplay
+          )}
           <h1 className="text-xl font-bold shadow-md border-[1px] px-2 mb-1">
             Creatures
           </h1>
@@ -118,7 +123,12 @@ const DeckCheck = () => {
           <h1 className="text-xl font-bold shadow-md border-[1px] px-2 mb-1">
             Enchantments
           </h1>
-          {cardFilterer(cardsFound, "Enchantment", setCard, setMobileCardDisplay)}
+          {cardFilterer(
+            cardsFound,
+            "Enchantment",
+            setCard,
+            setMobileCardDisplay
+          )}
           <h1 className="text-xl font-bold shadow-md border-[1px] px-2 mb-1">
             Artifacts
           </h1>
@@ -150,10 +160,9 @@ function cardFilterer(cards, value, setCard, setMobileCardDisplay) {
     ?.filter((ele) => ele?.type_line?.match(`${value}`))
     ?.map((e) => (
       <p
+        key={e}
         className="p-1 cursor-pointer"
-        onMouseOver={() => {
-          setCard(e);
-        }}
+        onMouseOver={() => setCard(e)}
         onClick={() => {
           setCard(e);
           setMobileCardDisplay(true);

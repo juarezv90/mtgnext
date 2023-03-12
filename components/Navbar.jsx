@@ -33,6 +33,7 @@ const Navbar = () => {
           <Link href="/DeckCheck">
             <p className="cursor-pointer p-2">Deck Check</p>
           </Link>
+          <Link href="/Blotter"><p className="cursor-pointer p-2">Blotter</p></Link>
         </div>
       </div>
     </div>
