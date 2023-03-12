@@ -53,7 +53,6 @@ const DeckCheck = () => {
         {/* start of card list enter */}
         <div className="flex flex-col mx-auto md:col-span-1 justify-start items-center">
           {/* card displayed on mouseover, disable on mobile and sm screen */}
-
           <textarea
             id="deckInput"
             style={{ resize: "none" }}

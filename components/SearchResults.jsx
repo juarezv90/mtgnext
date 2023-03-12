@@ -148,7 +148,8 @@ const SearchResults = () => {
         id="contentBox"
         className="max-w-[1240px] m-auto w-[100%] grid md:grid-cols-3 lg:grid-cols-4 gap-8 sm:grid-rows-2 p-4"
       >
-        {currentCards?.map((card) => {
+        {currentCards?.map((card,index) => {
+          console.log(card)
           return (
             <div
               key={card}
